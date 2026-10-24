@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghost</title>
+<link rel="icon" href="https://www.google.com/favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#fff;min-height:100vh;display:flex;flex-direction:column;color:#202124}
+.top{height:60px;display:flex;align-items:center;justify-content:flex-end;padding:0 20px;gap:16px;font-size:13px}
+.top a{color:#202124;text-decoration:none} .top a:hover{text-decoration:underline}
+.top .apps{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;cursor:pointer} .top .apps:hover{background:#f1f1f1}
+.top .avatar{width:32px;height:32px;background:#8e24aa;color:#fff;border-radius:50%;display:grid;place-items:center;font-size:14px}
+.center{flex:1;display:flex;flex-direction:column;align-items:center;padding-top:42px}
+.logo{font-size:88px;letter-spacing:-1px;line-height:1;margin-bottom:28px;font-family:'Product Sans',Arial,sans-serif;font-weight:400;user-select:none}
+.logo .b{color:#4285f4} .logo .r{color:#ea4335} .logo .y{color:#fbbc05} .logo .g{color:#34a853}
+.search-area{width:min(584px,92vw);position:relative}
+.search-box{width:100%;height:52px;border:1px solid #dfe1e5;border-radius:24px;display:flex;align-items:center;padding:0 20px;gap:14px;transition:.2s}
+.search-box:hover{box-shadow:0 1px 6px rgba(32,33,36,.28);border-color:transparent}
+.search-box:focus-within{box-shadow:0 1px 6px rgba(32,33,36,.28);border-color:transparent}
+.search-box i.search-icon{color:#9aa0a6;font-size:15px}
+.search-box input{flex:1;border:0;outline:0;font-size:16px;color:#202124;background:transparent}
+.search-box .side{color:#4285f4;font-size:20px;cursor:pointer;display:flex;gap:16px}
+.btns{margin-top:30px;display:flex;gap:12px}
+.btns button{background:#f8f9fa;border:1px solid #f8f9fa;color:#3c4043;padding:0 20px;height:36px;border-radius:4px;font-size:14px;cursor:pointer}
+.btns button:hover{box-shadow:0 1px 1px rgba(0,0,0,.1);background:#f8f9fa;border:1px solid #dadce0}
+.lang{margin-top:30px;font-size:13px;color:#4d5156}
+.lang a{color:#1a0dab;text-decoration:none;padding:0 3px} .lang a:hover{text-decoration:underline}
+.shortcuts{margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:min(400px,92vw)}
+.short{padding:12px 6px;text-align:center;border-radius:8px;cursor:pointer;transition:.2s}
+.short:hover{background:#f8f9fa}
+.short .ico{width:48px;height:48px;background:#f1f3f4;border-radius:50%;display:grid;place-items:center;margin:0 auto 8px;font-size:22px}
+.short span{font-size:12px;color:#202124}
+.results{width:min(652px,92vw);margin:30px auto 0;text-align:right;display:none}
+.ai-card{background:#f8f9fa;border:1px solid #dadce0;border-radius:8px;padding:16px;margin-bottom:16px;font-size:14px;line-height:1.7}
+.res-item{padding:16px 0;border-bottom:1px solid #eee;cursor:pointer}
+.res-item:hover{background:#fafafa}
+.footer{margin-top:auto;background:#f2f2f2;color:#70757a;font-size:14px}
+.footer .row{padding:14px 30px;border-bottom:1px solid #dadce0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer a{color:#70757a;text-decoration:none;padding-left:16px} .footer a:hover{color:#3c4043}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:999;padding:20px;align-items:center;justify-content:center}
+.modal-box{width:min(1100px,96vw);height:85vh;background:#fff;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.modal-top{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid #dadce0;background:#fff}
+iframe{flex:1;border:0;background:#fff}
+@media(max-width:600px){.logo{font-size:58px}.shortcuts{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div class="top">
+<a href="#" onclick="openSite('https://mail.google.com','Gmail')">Gmail</a>
+<a href="#" onclick="openSite('https://www.google.com/imghp','صور')">صور</a>
+<div class="apps" onclick="openSite('https://about.google/products/','تطبيقات Google')"><i class="fa-solid fa-grip"></i></div>
+<div class="avatar">G</div>
+</div>
+
+<div class="center">
+<div class="logo"><span class="b">G</span><span class="r">h</span><span class="y">o</span><span class="b">s</span><span class="g">t</span></div>
+
+<div class="search-area">
+<div class="search-box">
+<i class="fa-solid fa-magnifying-glass search-icon"></i>
+<input id="q" type="text" autocomplete="off" autofocus>
+<div class="side">
+<i class="fa-solid fa-microphone" style="color:#4285f4" title="بحث صوتي"></i>
+<i class="fa-solid fa-camera" style="color:#4285f4" title="بحث بالصور"></i>
+</div>
+</div>
+<div class="btns">
+<button onclick="doSearch()">بحث Ghost</button>
+<button onclick="lucky()">ضربة حظ</button>
+</div>
+<div class="lang">مُقدَّم من Ghost باللغة: <a href="#">العربية</a> <a href="#">English</a></div>
+
+<div class="shortcuts">
+<div class="short" onclick="openSite('https://youtube.com','YouTube')"><div class="ico" style="background:#ff000011"><i class="fa-brands fa-youtube" style="color:#ff0000"></i></div><span>YouTube</span></div>
+<div class="short" onclick="openSite('https://tiktok.com','TikTok')"><div class="ico"><i class="fa-brands fa-tiktok"></i></div><span>TikTok</span></div>
+<div class="short" onclick="openSite('https://facebook.com','Facebook')"><div class="ico" style="background:#1877f211"><i class="fa-brands fa-facebook" style="color:#1877f2"></i></div><span>Facebook</span></div>
+<div class="short" onclick="openSite('https://web.whatsapp.com','WhatsApp')"><div class="ico" style="background:#25d36611"><i class="fa-brands fa-whatsapp" style="color:#25d366"></i></div><span>WhatsApp</span></div>
+<div class="short" onclick="openSite('https://instagram.com','Instagram')"><div class="ico" style="background:#e1306c11"><i class="fa-brands fa-instagram" style="color:#e1306c"></i></div><span>Instagram</span></div>
+<div class="short" onclick="openSite('https://x.com','Twitter')"><div class="ico"><i class="fa-brands fa-x-twitter"></i></div><span>Twitter</span></div>
+<div class="short" onclick="openSite('https://web.telegram.org','Telegram')"><div class="ico" style="background:#26a5e411"><i class="fa-brands fa-telegram" style="color:#26a5e4"></i></div><span>Telegram</span></div>
+<div class="short" onclick="openSite('https://google.com','Google')"><div class="ico"><i class="fa-brands fa-google" style="color:#fbbc05"></i></div><span>Google</span></div>
+</div>
+
+<div id="results" class="results"></div>
+</div>
+
+<div class="footer">
+<div class="row"><span>مصر</span></div>
+<div class="row"><div><a href="#">حول</a><a href="#">الإعلانات</a><a href="#">الأعمال</a><a href="#">آلية عمل البحث</a></div><div><a href="#">الخصوصية</a><a href="#">البنود</a><a href="#">الإعدادات</a><span style="padding-right:16px;color:#70757a">01544451059</span></div></div>
+</div>
+
+<div id="modal" class="modal" onclick="if(event.target.id==='modal')closeModal()">
+<div class="modal-box">
+<div class="modal-top"><span id="mTitle">Browsing</span><div style="display:flex;gap:8px"><button onclick="window.open(cur,'_blank')" style="background:#1a73e8;color:#fff;border:0;padding:6px 14px;border-radius:4px;cursor:pointer">فتح خارجي</button><button onclick="closeModal()" style="background:#f1f3f4;border:0;padding:6px 14px;border-radius:4px;cursor:pointer">✕</button></div></div>
+<iframe id="frame"></iframe>
+</div>
+</div>
+
+<script>
+let cur=''
+const q=document.getElementById('q')
+function doSearch(){
+ let v=q.value.trim(); if(!v) return
+ let r=document.getElementById('results'); r.style.display='block'
+ r.innerHTML=`<div class="ai-card"><b>🤖 رد Ghost AI:</b> نتيجة عن <b>${v}</b> - الموقع ده نسخة طبق الأصل من جوجل باسم Ghost، سريع وبدون إعلانات. دوس على أي نتيجة تحت.</div>
+ <div class="res-item" onclick="openSite('https://www.youtube.com/results?search_query=${encodeURIComponent(v)}','YouTube')"><div style="color:#202124;font-size:18px;color:#1a0dab">YouTube: ${v} - فيديوهات</div><div style="color:#006621;font-size:14px">https://www.youtube.com/results?search_query=${v}</div></div>
+ <div class="res-item" onclick="openSite('https://www.tiktok.com/search?q=${encodeURIComponent(v)}','TikTok')"><div style="font-size:18px;color:#1a0dab">TikTok: ${v}</div><div style="color:#006621;font-size:14px">https://www.tiktok.com/search?q=${v}</div></div>
+ <div class="res-item" onclick="openSite('https://www.google.com/search?q=${encodeURIComponent(v)}','Google')"><div style="font-size:18px;color:#1a0dab">${v} - بحث Google</div><div style="color:#006621;font-size:14px">https://www.google.com/search?q=${v}</div></div>`
+ r.scrollIntoView({behavior:'smooth'})
+}
+function lucky(){ q.value='ترند مصر اليوم'; doSearch() }
+function openSite(u,t){ cur=u; document.getElementById('mTitle').innerText=t; document.getElementById('frame').src=u; document.getElementById('modal').style.display='flex'; document.body.style.overflow='hidden' }
+function closeModal(){ document.getElementById('modal').style.display='none'; document.getElementById('frame').src=''; document.body.style.overflow='' }
+q.addEventListener('keydown',e=>{ if(e.key==='Enter') doSearch() })
+</script>
+</body>
+</html>
